@@ -69,11 +69,14 @@
                    <td>john@example.com</td>
                    <td>097878677</td>
                    <td>
-                      <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-eye" aria-hidden="true">view</i>
+                      <button type="submit" class="btn btn-success btn-sm">
+                        <i class="fa fa-eye" aria-hidden="true">view</i>
                        </button>
-                      <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true">Edit</i>
+                      <button type="submit" class="btn btn-success btn-sm">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true">Edit</i>
                        </button>
-                       <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-trash-o" aria-hidden="true">delete                       </i>
+                       <button type="submit" class="btn btn-success btn-sm">
+                        <i class="fa fa-trash-o" aria-hidden="true">delete</i>
                        </button>
                    </td>
 
