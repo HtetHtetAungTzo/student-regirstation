@@ -158,7 +158,7 @@
 				$query = mysqli_query($con,$sql);
 
 				$users = mysqli_fetch_all($query,MYSQLI_ASSOC);
-
+				
 				return $users;
 			}
 			else{
@@ -166,6 +166,149 @@
 				exit();
 			}
 
+		}
+
+		public function edit($id)
+		{
+			global $con;
+
+			$sql = "SELECT * FROM users WHERE id='$id'";
+
+			$query = mysqli_query($con,$sql);
+
+			$user = mysqli_fetch_assoc($query);
+
+			if(count($user) == 0)
+			{
+				$_SESSION['error'] = 'Can not select this user';
+				header('location: list.php');
+				exit();
+			}
+			else{
+				return $user;
+			}
+		}
+
+		public function update($user,$change,$id)
+		{
+			global $con;
+
+			$id = $user['id'];
+			$name = $user['name'];
+			$phone = $user['phone'];
+			$email = $user['email'];
+			$address = $user['address'];
+			$password = $user['password'];
+			$cpassword = $user['cpassword'];
+
+			$url = 'edit.php?id='.$id;
+
+			if($name == "" || $name == null)
+			{
+				$_SESSION['error'] = "Name is required !";
+				header('location: '.$url);
+				exit();
+			}
+
+			if($email == "" || $email == null)
+			{
+				$_SESSION['error'] = "Email is required !";
+				header('location: '.$url);
+				exit();
+			}
+
+
+			if($phone == "" || $phone == null)
+			{
+				$_SESSION['error'] = "Phone is required !";
+				header('location: '.$url);
+				exit();
+			}
+
+			if($change == 'yes')
+			{
+				if($password == "" || $password == null && $cpassword == "" || $cpassword == null)
+				{
+					$_SESSION['error'] = "Password is required !";
+					header('location: '.$url);
+					exit();
+				}
+				else{
+					if($password != $cpassword)
+					{
+						$_SESSION['error'] = 'Confirm Password do not match !';
+						header('location: '.$url);
+						exit();
+					}
+				}
+			}
+
+			// $s = "SELECT * FROM users WHERE email = '$email' AND id<>'$id'";
+			// $q = mysqli_query($con,$s);
+
+			// $row = mysqli_num_rows($q);
+
+			// if($row > 0)
+			// {
+			// 	$_SESSION['error'] = "Your email is already registered !";
+			// 	header('location: '.$url);
+			// 	exit();
+			// }
+			// else{
+				if($change == 'yes')
+				{
+					$password = md5($password);
+					$sql = "UPDATE users SET name='$name',email='$email',phone='$phone',address='$address',password='$password' WHERE id='$id'";
+				}
+				else{
+					$sql = "UPDATE users SET name='$name',email='$email',phone='$phone',address='$address' WHERE id='$id'";
+				}
+
+				$query = mysqli_query($con,$sql);
+
+				if(!$query)
+				{
+					$_SESSION['error'] = die(mysqli_error($query));
+
+					header('location: '.$url);
+				}
+				else{
+					$_SESSION['success'] = 'Successfully Register !';
+
+					if(!$_SESSION['user_id'])
+					{
+						$_SESSION['user_id'] = mysqli_insert_id($query);
+					}
+
+					header('location: list.php');
+				}
+			// }
+			
+		}
+
+		public function delete($id)
+		{
+			global $con;
+
+			if($id == $_SESSION['user_id'])
+			{
+				$_SESSION['error'] = "You can't delete this record!";
+			}
+			else{
+				$sql = "DELETE FROM users WHERE id='$id'";
+
+				$query = mysqli_query($con,$sql);
+
+				if(!$query)
+				{
+					$_SESSION['error'] = 'Can not delete !';
+				}
+				else{
+					$_SESSION['success'] = 'Successfully Delete !';
+				}
+			}
+
+			header('location: list.php');
 		}
 
 	}

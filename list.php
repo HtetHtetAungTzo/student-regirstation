@@ -5,6 +5,9 @@
   $user = new user;
 
   $users = $user->getUserList();
+  // print_r($users);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,38 +45,44 @@
                   <a href="logout.php" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-sign-out"></span> Logout</a><br/>
                 </div>
               </div>
-            
-            <table class=" table table-bordered" style="margin-top:15px;">
+              <table class=" table table-bordered" style="margin-top:15px;">
                   <thead>
                    <tr>
                        <th>Id</th>
                         <th>Name</th>
                        <th>Email</th>
                        <th>Phone</th>
-                       <th>Action</th>
+                       <th>Address</th>
+                       <th width="230px">Action</th>
                       </tr>
                    </thead>
-                <tbody>
-                  <tr>
-                    <td>1cst-4</td>
-                    <td>Doe</td>
-                   <td>john@example.com</td>
-                   <td>097878677</td>
-                   <td>
-                      <button type="submit" class="btn btn-success btn-sm">
-                        <i class="fa fa-eye" aria-hidden="true">view</i>
-                       </button>
-                      <button type="submit" class="btn btn-success btn-sm">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true">Edit</i>
-                       </button>
-                       <button type="submit" class="btn btn-success btn-sm">
-                        <i class="fa fa-trash-o" aria-hidden="true">delete</i>
-                       </button>
-                   </td>
+                    <tbody>
+                      <?php $x =1; ?>
+                      <?php foreach($users as $u): ?>
+                        <tr>
+                          <td><?php print $x; ?></td>
+                          <td><?php print $u['name']; ?></td>
+                          <td><?php print $u['email']; ?></td>
+                          <td><?php print $u['phone']; ?></td>
+                          <td><?php print $u['address']; ?></td>
+                          <td>
+                            <a href="detail.php?id=<?php print $u['id']; ?>" class="btn btn-success btn-sm">
+                              <i class="fa fa-eye"> view</i>
+                            </a>
+                            <a href="edit.php?id=<?php print $u['id']; ?>" class="btn btn-info btn-sm">
+                              <i class="fa fa-edit"> Edit</i>
+                            </a>
+                            <a href="delete.php?id=<?php print $u['id']; ?>" class="btn btn-danger btn-sm">
+                              <i class="fa fa-trash"> Delete</i>
+                            </a>
+                          </td>
+                        </tr>
+                        <?php $x++; ?>
+                      <?php endforeach; ?>
 
-                 </tr>
-     
-             </tbody>
+                     </tbody>
+              
+
   
                 </table>
           </div>
