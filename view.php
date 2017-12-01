@@ -22,21 +22,13 @@
 <body>
 
 <div class="container-fluid">
-      <!-- start header bar -->
-      <div class="row header">
-        <div class="row head">
-          <div class="container">
-            <h1><i>Student Registration System</i></h1>
-          </div>
-        </div>
-       
-      <!-- ============== /end header ========== -->
+      <?php require_once('partials/header.php'); ?>
 
       <div class="row">
         <div class="container">
-          <div class="col-md-offset-4 col-md-4 login-box">
+          <div class="col-md-offset-4 col-md-4 view-box">
             <h3 class="text-center">View student record</h3>
-             <img src="image/1.png" style="width:50px height:50px;">
+             <img src="image/1.png" style="width:40px height:40px;">
 
             <table class=" table table-stripped" style="margin-top:15px;">
                   <tbody>

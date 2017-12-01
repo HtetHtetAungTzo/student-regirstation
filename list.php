@@ -1,3 +1,6 @@
+<?php  
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -21,37 +24,20 @@
   <body>
 
     <div class="container-fluid">
-      <!-- start header bar -->
-      <div class="row header">
-        <div class="row head">
-          <div class="container">
-            <h1><i>Student Registration System</i></h1>
-          </div>
-        </div>
-        <div class="row menu">
-          <div class="container">
-            <nav class="navbar">
-              <div class="container-fluid">
-                <div class="navbar-header">
-                  <a class="navbar-brand" href="#">WebSiteName</a>
-                </div>
-                <ul class="nav navbar-nav">
-                  <li class="active"><a href="#">Home</a></li>
-                  <li><a href="#">Page 1</a></li>
-                  <li><a href="#">Page 2</a></li>
-                  <li><a href="#">Page 3</a></li>
-                </ul>
-              </div>
-            </nav>
-          </div>
-        </div>
-      </div>
-      <!-- ============== /end header ========== -->
+      <?php require_once('partials/header.php'); ?>
 
       <div class="row">
         <div class="container">
-          <div class="col-md-12 listbox" style="padding-top:15px;">
+          <div class="col-md-12 listbox" style="margin-top: 50px;">
             <h4>Student List Table</h4>
+            <?php  
+              if($_SESSION['success'])
+              {
+            ?>
+            <div class="alert alert-success"><?php print $_SESSION['success']; $_SESSION['success']=''; ?></div>
+            <?php
+              }
+            ?>
             <table class=" table table-bordered" style="margin-top:15px;">
                   <thead>
                    <tr>

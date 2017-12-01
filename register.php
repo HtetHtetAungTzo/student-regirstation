@@ -1,3 +1,28 @@
+<?php  
+  require('include/user.php');
+
+  if(@$_POST['submit'])
+  {
+    @$name = $_POST['name'];
+  @$email = $_POST['email'];
+  @$phone = $_POST['phone'];
+  @$address = $_POST['address'];
+  @$password = $_POST['password'];
+
+  $info = array(
+    'name' => $name,
+    'email' => $email,
+    'phone' => $phone,
+    'address' => $address,
+    'password' => $password
+  );
+
+  $user = new user($con);
+
+  $user->register($info);
+  }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -21,32 +46,7 @@
   <body>
 
     <div class="container-fluid">
-      <!-- start header bar -->
-      <div class="row header">
-        <div class="col-md-12 head">
-          <div class="container">
-            <h1><i>Student Registration System</i></h1>
-          </div>
-        </div>
-        <div class="col-md-12 menu">
-          <div class="container">
-            <nav class="navbar">
-              <div class="container-fluid">
-                <div class="navbar-header">
-                  <a class="navbar-brand" href="#">WebSiteName</a>
-                </div>
-                <ul class="nav navbar-nav">
-                  <li class="active"><a href="#">Home</a></li>
-                  <li><a href="#">Page 1</a></li>
-                  <li><a href="#">Page 2</a></li>
-                  <li><a href="#">Page 3</a></li>
-                </ul>
-              </div>
-            </nav>
-          </div>
-        </div>
-      </div>
-      <!-- ============== /end header ========== -->
+     <?php require_once('partials/header.php'); ?>
 
       <div class="row">
         <div class="container">
@@ -87,7 +87,8 @@
                 </div>
 
                 <div class="form-group">
-                  <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-registered"></i> Register</button>
+                  <!-- <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-registered"></i> Register</button> -->
+                  <input type="submit" name="submit" class="btn btn-success btn-sm" value="Register">
                 </div>
 
                 <div class="form-group">
