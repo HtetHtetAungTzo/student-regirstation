@@ -1,5 +1,10 @@
 <?php  
   session_start();
+  include_once('include/user.php');
+
+  $user = new user;
+
+  $users = $user->getUserList();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,15 +34,15 @@
       <div class="row">
         <div class="container">
           <div class="col-md-12 listbox" style="margin-top: 50px;">
-            <h4>Student List Table</h4>
-            <?php  
-              if($_SESSION['success'])
-              {
-            ?>
-            <div class="alert alert-success"><?php print $_SESSION['success']; $_SESSION['success']=''; ?></div>
-            <?php
-              }
-            ?>
+            <?php include_once('partials/status.php'); ?>
+              <div class="row">
+                <div class="col-md-9"><h4>Student List Table</h4></div>
+                <div class="col-md-3">
+                  <a href="register.php" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Add New</a>
+                  <a href="logout.php" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-sign-out"></span> Logout</a><br/>
+                </div>
+              </div>
+            
             <table class=" table table-bordered" style="margin-top:15px;">
                   <thead>
                    <tr>

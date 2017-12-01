@@ -1,3 +1,21 @@
+<?php  
+  if(!@$_SESSION)
+  {
+    session_start();
+  }
+  require('include/user.php');
+
+  if(@$_POST['submit'])
+  {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $user = new user;
+
+    $user->login($email,$password);
+  }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -27,13 +45,13 @@
         <div class="container">
           <div class="col-md-offset-4 col-md-4 login-box">
             <h3 class="text-center">Login To Continue</h3>
-
+            <?php include_once('partials/status.php'); ?>
             <div class="col-md-12">
               <form action="" method="POST" class="form form-horizontal">
               
                 <div class="form-group">
                   <label for="email">Email:</label>
-                  <input type="text" name="email" class="form-control">
+                  <input type="text" name="email" value="<?php print @$_SESSION['email'];$_SESSION['email']=''; ?>" class="form-control">
                 </div>
 
                 <div class="form-group">
@@ -42,7 +60,8 @@
                 </div>
 
                 <div class="form-group">
-                  <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-sign-in"></i> Sign In</button>
+                  <!-- <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-sign-in"></i> Sign In</button> -->
+                  <input type="submit" name="submit" class="btn btn-success btn-sm" value="Sign In">
                 </div>
 
                 <div class="form-group">
